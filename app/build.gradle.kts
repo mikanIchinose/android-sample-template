@@ -1,19 +1,15 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.kotlinAndroid)
-    alias(libs.plugins.kotlinCompose)
+    alias(libs.plugins.sampleConventionAndroidApplication)
 }
 
 android {
     namespace = "io.github.mikan.sample"
-    compileSdk = 36
 
     defaultConfig {
         applicationId = "io.github.mikan.sample"
-        minSdk = 24
-        targetSdk = 36
-        versionCode = 1
-        versionName = "1.0"
+        targetSdk = libs.versions.targetSdk.get().toInt()
+        versionCode = libs.versions.versionCode.get().toInt()
+        versionName = libs.versions.versionName.get()
     }
 
     buildTypes {
@@ -25,27 +21,10 @@ android {
             )
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
-    }
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
     implementation(libs.androidxCoreKtx)
     implementation(libs.androidxLifecycleRuntimeKtx)
     implementation(libs.androidxActivityCompose)
-    implementation(platform(libs.androidxComposeBom))
-    implementation(libs.androidxUi)
-    implementation(libs.androidxUiGraphics)
-    implementation(libs.androidxUiToolingPreview)
-    implementation(libs.androidxMaterial3)
-    debugImplementation(libs.androidxUiTooling)
-    debugImplementation(libs.androidxUiTestManifest)
 }

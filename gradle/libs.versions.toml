@@ -1,10 +1,17 @@
 [versions]
+targetSdk = "36"
+compileSdk = "36"
+minSdk = "24"
+versionCode = "1"
+versionName = "1.0"
 agp = "8.11.0"
 kotlin = "2.2.0"
 coreKtx = "1.16.0"
 lifecycleRuntimeKtx = "2.9.1"
 activityCompose = "1.10.1"
 composeBom = "2025.06.01"
+androidTools = "31.11.0" # agp + 23.0.0
+androidxLintGradle = "1.0.0-alpha05"
 
 [libraries]
 androidxCoreKtx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -16,10 +23,30 @@ androidxUiGraphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidxUiTooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidxUiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidxUiTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
-androidxUiTestJunit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidxMaterial3 = { group = "androidx.compose.material3", name = "material3" }
+
+# convention plugin
+androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
+androidToolsCommon = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
+composeGradlePlugin = { module = "org.jetbrains.kotlin:compose-compiler-gradle-plugin", version.ref = "kotlin" }
+kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
+androidxLintGradle = { group = "androidx.lint", name = "lint-gradle", version.ref = "androidxLintGradle" }
+
+[bundles]
+plugins = [
+    "androidGradlePlugin",
+    "androidToolsCommon",
+    "composeGradlePlugin",
+    "kotlinGradlePlugin",
+]
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+androidLint = { id = "com.android.lint", version.ref = "agp" }
+
+# convention plugin
+androidApplicationConventionPluguin = { id = "android.application.convention.plugin" }
+androidLibraryConventionPluguin = { id = "android.library.convention.plugin" }
+sampleConventionAndroidApplication = { id = "sample.convention.android.application" }
