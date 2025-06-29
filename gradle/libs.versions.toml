@@ -29,6 +29,11 @@ androidxUiToolingPreview = { group = "androidx.compose.ui", name = "ui-tooling-p
 androidxUiTestManifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidxMaterial3 = { group = "androidx.compose.material3", name = "material3" }
 detektFormatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
+kotlinStdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
+kotlinTest = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
+core = { group = "androidx.test", name = "core", version.ref = "core" }
+junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
 # convention plugin
 androidGradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
@@ -39,11 +44,6 @@ androidMultiplatformGradlePlugin = { group = "com.android.kotlin.multiplatform.l
 kotlinGradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 androidxLintGradle = { group = "androidx.lint", name = "lint-gradle", version.ref = "androidxLintGradle" }
 detektGradlePlugin = { group = "io.gitlab.arturbosch.detekt", name = "detekt-gradle-plugin", version.ref = "detekt" }
-kotlinStdlib = { group = "org.jetbrains.kotlin", name = "kotlin-stdlib", version.ref = "kotlin" }
-kotlinTest = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
-core = { group = "androidx.test", name = "core", version.ref = "core" }
-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
 [bundles]
 plugins = [
@@ -58,6 +58,7 @@ plugins = [
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinCompose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 androidLint = { id = "com.android.lint", version.ref = "agp" }
@@ -67,4 +68,5 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 
 # convention plugin
 sampleConventionAndroidApplication = { id = "sample.convention.android.application" }
+sampleConventionAndroidLibrary = { id = "sample.convention.android.library" }
 sampleConventionKotlinMultiplatform = { id = "sample.convention.kotlin.multiplatform" }
