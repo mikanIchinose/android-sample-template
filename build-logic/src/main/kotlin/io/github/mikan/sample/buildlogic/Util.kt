@@ -10,6 +10,7 @@ import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.getByType
+import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 
 internal val Project.libs: VersionCatalog
     get() = extensions.getByType<VersionCatalogsExtension>()
@@ -54,3 +55,6 @@ internal val Project.android: CommonExtension<*, *, *, *, *, *>
         .recoverCatching { androidApplication }
         .onFailure { println("Could not find Library or Application extension from this project") }
         .getOrThrow()
+
+internal val Project.kotlinMultiplatform: KotlinMultiplatformExtension
+    get() = extensions.getByType<KotlinMultiplatformExtension>()
