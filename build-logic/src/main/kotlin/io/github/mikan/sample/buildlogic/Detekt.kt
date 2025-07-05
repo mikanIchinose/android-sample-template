@@ -1,5 +1,6 @@
 package io.github.mikan.sample.buildlogic
 
+import io.github.mikan.sample.buildlogic.dsl.alias
 import io.github.mikan.sample.buildlogic.dsl.library
 import io.github.mikan.sample.buildlogic.dsl.libs
 import io.github.mikan.sample.buildlogic.dsl.plugin
@@ -7,7 +8,6 @@ import io.github.mikan.sample.buildlogic.dsl.plugins
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 import org.gradle.api.Project
-import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
@@ -15,7 +15,7 @@ import org.gradle.kotlin.dsl.withType
 
 internal fun Project.configureDetekt() {
     plugins {
-        apply(libs.plugin("detekt").pluginId)
+        alias(libs.plugin("detekt"))
     }
 
     dependencies {
@@ -44,6 +44,6 @@ private fun Project.detekt(action: DetektExtension.() -> Unit) {
     }
 }
 
-private fun DependencyHandlerScope.detektPlugins(artifact: MinimalExternalModuleDependency) {
+private fun DependencyHandlerScope.detektPlugins(artifact: Any) {
     "detektPlugins"(artifact)
 }

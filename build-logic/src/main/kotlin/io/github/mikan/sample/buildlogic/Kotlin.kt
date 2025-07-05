@@ -1,7 +1,9 @@
 package io.github.mikan.sample.buildlogic
 
+import io.github.mikan.sample.buildlogic.dsl.alias
 import io.github.mikan.sample.buildlogic.dsl.libs
 import io.github.mikan.sample.buildlogic.dsl.plugin
+import io.github.mikan.sample.buildlogic.dsl.plugins
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -9,8 +11,8 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 
 internal fun Project.configureKotlin() {
-    with(pluginManager) {
-        apply(libs.plugin("kotlinAndroid").pluginId)
+    plugins {
+        alias(libs.plugin("kotlinAndroid"))
     }
 
     configure<KotlinAndroidProjectExtension> {

@@ -1,5 +1,6 @@
 package io.github.mikan.sample.buildlogic
 
+import io.github.mikan.sample.buildlogic.dsl.alias
 import io.github.mikan.sample.buildlogic.dsl.android
 import io.github.mikan.sample.buildlogic.dsl.debugImplementation
 import io.github.mikan.sample.buildlogic.dsl.implementation
@@ -12,7 +13,7 @@ import org.gradle.kotlin.dsl.dependencies
 
 internal fun Project.configureAndroidCompose() {
     plugins {
-        apply(libs.plugin("kotlinCompose").pluginId)
+        alias(libs.plugin("kotlinCompose"))
     }
 
     android {
