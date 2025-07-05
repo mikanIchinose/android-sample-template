@@ -63,8 +63,9 @@ internal fun Project.android(action: CommonExtension<*, *, *, *, *, *>.() -> Uni
         .action()
 }
 
-internal val Project.kotlinMultiplatform: KotlinMultiplatformExtension
-    get() = extensions.getByType<KotlinMultiplatformExtension>()
+internal fun Project.kotlinMultiplatform(action: KotlinMultiplatformExtension.() -> Unit) {
+    extensions.getByType<KotlinMultiplatformExtension>().action()
+}
 
 internal fun Project.plugins(action: PluginManager.() -> Unit) {
     pluginManager.action()

@@ -4,17 +4,18 @@ import com.android.build.api.dsl.androidLibrary
 import io.github.mikan.sample.buildlogic.dsl.kotlinMultiplatform
 import io.github.mikan.sample.buildlogic.dsl.library
 import io.github.mikan.sample.buildlogic.dsl.libs
+import io.github.mikan.sample.buildlogic.dsl.plugin
 import io.github.mikan.sample.buildlogic.dsl.plugins
 import io.github.mikan.sample.buildlogic.dsl.version
 import org.gradle.api.Project
 
 internal fun Project.configureKotlinMultiplatform() {
     plugins {
-        apply("org.jetbrains.kotlin.multiplatform")
-        apply("com.android.kotlin.multiplatform.library")
+        apply(libs.plugin("kotlinMultiplatform").pluginId)
+        apply(libs.plugin("androidKotlinMultiplatformLibrary").pluginId)
     }
 
-    with(kotlinMultiplatform) {
+    kotlinMultiplatform {
         androidLibrary {
             compileSdk = libs.version("compileSdk").toInt()
             minSdk = libs.version("minSdk").toInt()
