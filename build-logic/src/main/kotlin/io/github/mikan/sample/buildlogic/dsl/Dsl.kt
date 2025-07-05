@@ -1,4 +1,4 @@
-package io.github.mikan.sample.buildlogic
+package io.github.mikan.sample.buildlogic.dsl
 
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.dsl.CommonExtension
@@ -8,6 +8,7 @@ import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.plugins.PluginManager
 import org.gradle.kotlin.dsl.DependencyHandlerScope
 import org.gradle.kotlin.dsl.getByType
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
@@ -32,29 +33,39 @@ internal fun DependencyHandlerScope.implementation(artifact: MinimalExternalModu
     add("implementation", artifact)
 }
 
-internal fun DependencyHandlerScope.debugImplementation(
-    artifact: MinimalExternalModuleDependency,
-) {
+internal fun DependencyHandlerScope.debugImplementation(artifact: MinimalExternalModuleDependency) {
     add("debugImplementation", artifact)
 }
 
-internal fun DependencyHandlerScope.testImplementation(
-    artifact: MinimalExternalModuleDependency,
-) {
+internal fun DependencyHandlerScope.testImplementation(artifact: MinimalExternalModuleDependency) {
     add("testImplementation", artifact)
 }
 
-internal val Project.androidApplication: ApplicationExtension
+private val Project.androidApplication: ApplicationExtension
     get() = extensions.getByType<ApplicationExtension>()
 
-internal val Project.androidLibrary: LibraryExtension
+private val Project.androidLibrary: LibraryExtension
     get() = extensions.getByType<LibraryExtension>()
 
-internal val Project.android: CommonExtension<*, *, *, *, *, *>
-    get() = runCatching { androidLibrary }
+internal fun Project.androidApplication(actions: ApplicationExtension.() -> Unit) {
+    androidApplication.actions()
+}
+
+internal fun Project.androidLibrary(actions: LibraryExtension.() -> Unit) {
+    androidLibrary.actions()
+}
+
+internal fun Project.android(action: CommonExtension<*, *, *, *, *, *>.() -> Unit) {
+    runCatching { androidLibrary }
         .recoverCatching { androidApplication }
         .onFailure { println("Could not find Library or Application extension from this project") }
         .getOrThrow()
+        .action()
+}
 
 internal val Project.kotlinMultiplatform: KotlinMultiplatformExtension
     get() = extensions.getByType<KotlinMultiplatformExtension>()
+
+internal fun Project.plugins(action: PluginManager.() -> Unit) {
+    pluginManager.action()
+}

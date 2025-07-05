@@ -1,10 +1,13 @@
 package io.github.mikan.sample.buildlogic
 
+import io.github.mikan.sample.buildlogic.dsl.android
+import io.github.mikan.sample.buildlogic.dsl.libs
+import io.github.mikan.sample.buildlogic.dsl.version
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 
 internal fun Project.configureAndroid() {
-    with(android) {
+    android {
         compileSdk = libs.version("compileSdk").toInt()
 
         defaultConfig {

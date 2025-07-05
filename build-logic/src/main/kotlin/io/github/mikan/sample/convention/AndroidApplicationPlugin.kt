@@ -5,6 +5,7 @@ import io.github.mikan.sample.buildlogic.configureAndroidCompose
 import io.github.mikan.sample.buildlogic.configureDetekt
 import io.github.mikan.sample.buildlogic.configureKotlin
 import io.github.mikan.sample.buildlogic.configureUnitTest
+import io.github.mikan.sample.buildlogic.dsl.plugins
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -12,7 +13,10 @@ import org.gradle.api.Project
 class AndroidApplicationPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            pluginManager.apply("com.android.application")
+            plugins {
+                apply("com.android.application")
+            }
+
             configureKotlin()
             configureAndroid()
             configureAndroidCompose()

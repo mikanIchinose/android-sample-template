@@ -1,8 +1,12 @@
 package io.github.mikan.sample.buildlogic
 
+import io.github.mikan.sample.buildlogic.dsl.libs
+import io.github.mikan.sample.buildlogic.dsl.plugin
+import io.github.mikan.sample.buildlogic.dsl.plugins
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.apply
 
 internal fun Project.configureKmpCompose() {
-    apply(plugin = libs.plugin("kotlinCompose").pluginId)
+    plugins {
+        apply(libs.plugin("kotlinCompose").pluginId)
+    }
 }

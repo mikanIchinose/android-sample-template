@@ -1,10 +1,15 @@
 package io.github.mikan.sample.buildlogic
 
 import com.android.build.api.dsl.androidLibrary
+import io.github.mikan.sample.buildlogic.dsl.kotlinMultiplatform
+import io.github.mikan.sample.buildlogic.dsl.library
+import io.github.mikan.sample.buildlogic.dsl.libs
+import io.github.mikan.sample.buildlogic.dsl.plugins
+import io.github.mikan.sample.buildlogic.dsl.version
 import org.gradle.api.Project
 
 internal fun Project.configureKotlinMultiplatform() {
-    with(pluginManager) {
+    plugins {
         apply("org.jetbrains.kotlin.multiplatform")
         apply("com.android.kotlin.multiplatform.library")
     }
