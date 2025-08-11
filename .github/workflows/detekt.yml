@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # arrange
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: ./.github/actions/setup-java
       - uses: reviewdog/action-setup@v1
       # act
